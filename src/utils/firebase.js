@@ -13,8 +13,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.firestore();
+export const db = firebase.firestore();
 
-db.collection("quotes").get();
+db.collection("quotes")
+  .get()
+  .then((snapshot) => {
+    console.log("snapshot");
+    snapshot.forEach((doc) => {
+      console.log(doc.data());
+    });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 export default firebase;
